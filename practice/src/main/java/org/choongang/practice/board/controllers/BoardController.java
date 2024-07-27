@@ -5,9 +5,7 @@ import org.choongang.practice.board.entities.Post;
 import org.choongang.practice.board.repositories.PostRepository;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
@@ -27,9 +25,36 @@ public class BoardController {
     }
 
     @GetMapping("/post/{id}")
-    public String viewPost(@PathVariable Long id, Model model) {
+    public String viewPost(@PathVariable("id") Long id, Model model) {
         postRepository.findById(id).ifPresent(post -> model.addAttribute("post", post));
+        //postRepository.findById(id);
+        //model.addAttribute("post", postRepository.findById(id));
 
         return "board/post";
+    }
+
+    // 게시글 작성
+    @GetMapping("/write")
+    public String writePost(Model model) {
+        model.addAttribute("post", new Post());
+
+        return "board/write";
+    }
+
+    // 게시글 수정
+    @GetMapping("/update/{id}")
+    public String editPost(@PathVariable("id") Long id, Model model) {
+        Post post = postRepository.findById(id).orElse(null);
+        model.addAttribute("post", post);
+
+        return "board/update";
+    }
+
+    // 게시글 저장✨
+    @PostMapping("/save")
+    public String savePost(@ModelAttribute Post post) {
+        postRepository.save(post);
+
+        return "redirect:/board/list";
     }
 }
