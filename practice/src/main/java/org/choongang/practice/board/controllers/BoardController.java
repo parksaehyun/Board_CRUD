@@ -38,17 +38,17 @@ public class BoardController {
     public String writePost(Model model) {
         model.addAttribute("post", new Post());
 
+
         return "board/write";
     }
 
     // 게시글 수정
     @GetMapping("/update/{id}")
     public String editPost(@PathVariable("id") Long id, Model model) {
-        Post post = postRepository.findById(id).orElse(null);
-        model.addAttribute("post", post);
 
         return "board/update";
     }
+
 
     // 게시글 저장✨
     @PostMapping("/save")
