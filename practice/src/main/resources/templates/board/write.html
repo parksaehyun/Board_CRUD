@@ -8,7 +8,7 @@
 <body>
 <!--<h1>글 쓰기</h1>-->
 <h1 th:text="${post.id} != null ? '글 수정' : '글 쓰기'">글 쓰기</h1>
-<form method="post" autocomplete="off" th:object="${post}" th:action="@{/board/save}">
+<form method="post" autocomplete="off" th:object="${requestPost}" th:action="@{/board/save}">
     <dl>
         <dt>글 제목</dt>
         <dd>

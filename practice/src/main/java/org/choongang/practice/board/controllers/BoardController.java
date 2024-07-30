@@ -1,5 +1,6 @@
 package org.choongang.practice.board.controllers;
 
+import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.choongang.practice.board.entities.Post;
 import org.choongang.practice.board.repositories.PostRepository;
@@ -8,6 +9,7 @@ import org.choongang.practice.board.services.PostInfoService;
 import org.choongang.practice.board.services.PostSaveService;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.validation.Errors;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -67,8 +69,8 @@ public class BoardController {
 
     // 게시글 저장✨
     @PostMapping("/save")
-    public String savePost(@ModelAttribute Post post) {
-        postSaveService.save(post);
+    public String savePost(@Valid RequestPost form, Errors errors, @ModelAttribute Post post) {
+        postSaveService.save(form);
 
         return "redirect:/board/list";
     }
