@@ -3,6 +3,8 @@ package org.choongang.practice.board.controllers;
 import lombok.RequiredArgsConstructor;
 import org.choongang.practice.board.entities.Post;
 import org.choongang.practice.board.repositories.PostRepository;
+import org.choongang.practice.board.services.PostInfoService;
+import org.choongang.practice.board.services.PostSaveService;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
@@ -14,21 +16,23 @@ import java.util.List;
 @RequiredArgsConstructor
 public class BoardController {
 
-    private final PostRepository postRepository;
+    private final PostInfoService postInfoService;
+    private final PostSaveService postSaveService;
 
+    // 게시글 목록 조회
     @GetMapping("/list")
     public String list(Model model) {
-        List<Post> posts = postRepository.findAll();
+        List<Post> posts =  postInfoService.getPosts();
         model.addAttribute("posts", posts);
 
         return "board/list";
     }
 
+    // 게시글 1개 조회
     @GetMapping("/post/{id}")
     public String viewPost(@PathVariable("id") Long id, Model model) {
-        postRepository.findById(id).ifPresent(post -> model.addAttribute("post", post));
-        //postRepository.findById(id);
-        //model.addAttribute("post", postRepository.findById(id));
+        Post post =  postInfoService.getPost(id);
+        model.addAttribute("post", post);
 
         return "board/post";
     }
@@ -37,7 +41,6 @@ public class BoardController {
     @GetMapping("/write")
     public String writePost(Model model) {
         model.addAttribute("post", new Post());
-
 
         return "board/write";
     }
@@ -53,7 +56,7 @@ public class BoardController {
     // 게시글 저장✨
     @PostMapping("/save")
     public String savePost(@ModelAttribute Post post) {
-        postRepository.save(post);
+        postSaveService.save(post);
 
         return "redirect:/board/list";
     }
