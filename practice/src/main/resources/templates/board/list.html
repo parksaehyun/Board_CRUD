@@ -1,21 +1,17 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org"
       xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
-      layout:decorate="~{board/layouts/main}">
-<head>
-    <meta charset="UTF-8">
-    <title>게시판</title>
-</head>
-<body>
+      layout:decorate="~{layouts/main}">
+<main layout:fragment="content">
 <h1 th:text="#{게시물_목록}">게시물 목록</h1>
 <table>
     <thead>
     <tr>
-        <th>게시글 번호</th>
-        <th>제목</th>
+        <th th:text="#{게시물_번호}">게시글 번호</th>
+        <th th:text="#{게시글_제목}">제목</th>
     </tr>
     <div>
-        <a th:href="@{/board/write}">글 쓰기</a>
+        <a th:href="@{/board/write}" th:text="#{글쓰기}">글 쓰기</a>
     </div>
     </thead>
     <tbody>
@@ -27,5 +23,5 @@
     </tr>
     </tbody>
 </table>
-</body>
+</main>
 </html>

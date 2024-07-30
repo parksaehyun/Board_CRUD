@@ -1,4 +1,4 @@
-package org.choongang.global.configs;
+package org.choongang.practice.global.configs;
 
 import org.springframework.context.MessageSource;
 import org.springframework.context.annotation.Bean;

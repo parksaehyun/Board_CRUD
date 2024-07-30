@@ -16,13 +16,13 @@
 
     <script th:src="@{/common/js/common.js}"></script>
     <script th:src="@{/board/js/common.js}"></script>
-    <script th:if="${addScript != null}" th:each="jsFile : ${addScript}" th:src="@{/board/js/{file}.js(file=${jsFile})}"></script>
+    <script th:if="${addScript != null}"
+            th:each="jsFile : ${addScript}" th:src="@{/board/js/{file}.js(file=${jsFile})}"></script>
     <th:block layout:fragment="addScript"></th:block>
 </head>
 <body>
-<header th:replace="~{board/outlines/_header::common}"></header>
-<main layout:fragment="content"></main>
-<footer th:replace="~{board/outlines/_footer::common}"></footer>
-<iframe name="ifrmHidden" class="dn"></iframe>
+    <header th:replace="~{outlines/_header::common}"></header>
+    <main layout:fragment="content"></main>
+    <footer th:replace="~{outlines/_footer::common}"></footer>
 </body>
 </html>
