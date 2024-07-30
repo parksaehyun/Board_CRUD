@@ -66,10 +66,14 @@ public class BoardController {
         return "redirect:/board/list";
     }
 
-
     // 게시글 저장✨
     @PostMapping("/save")
-    public String savePost(@Valid RequestPost form, Errors errors, @ModelAttribute Post post) {
+    public String savePost(@Valid RequestPost form, Errors errors) {
+
+        if (errors.hasErrors()) {
+            return "board/write";
+        }
+
         postSaveService.save(form);
 
         return "redirect:/board/list";
