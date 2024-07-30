@@ -53,7 +53,7 @@ public class BoardController {
     @GetMapping("/update/{id}")
     public String editPost(@PathVariable("id") Long id, Model model) {
         RequestPost post =  postInfoService.getForm(id);
-        model.addAttribute("post", post);
+        model.addAttribute("requestPost", post);
 
         return "board/update";
     }
