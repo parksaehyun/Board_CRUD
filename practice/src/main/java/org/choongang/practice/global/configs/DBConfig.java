@@ -1,4 +1,4 @@
-package org.choongang.practice.configs;
+package org.choongang.practice.global.configs;
 
 import com.querydsl.jpa.impl.JPAQueryFactory;
 import jakarta.persistence.EntityManager;

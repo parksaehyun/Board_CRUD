@@ -52,8 +52,8 @@ public class BoardController {
     // 게시글 수정
     @GetMapping("/update/{id}")
     public String editPost(@PathVariable("id") Long id, Model model) {
-        Post post =  postInfoService.getPost(id);
-        model.addAttribute("post", post);
+        RequestPost post =  postInfoService.getForm(id);
+        model.addAttribute("requestPost", post);
 
         return "board/update";
     }
@@ -69,16 +69,21 @@ public class BoardController {
     // 게시글 저장✨
     @PostMapping("/save")
     public String savePost(@Valid RequestPost form, Errors errors) {
+        String mode = form.getId() == null ? "write" : "update";
 
         if (errors.hasErrors()) {
-            return "board/write";
+            return "board/" + mode;
         }
 
+        /*
         if (form.getId() != null && postInfoService.getPost(form.getId()) != null) {
             postSaveService.save(form);
         } else {
             postSaveService.save(form);
         }
+         */
+
+        postSaveService.save(form);
   
         return "redirect:/board/list";
     }
