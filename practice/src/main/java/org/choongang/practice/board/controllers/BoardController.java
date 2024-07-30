@@ -3,7 +3,6 @@ package org.choongang.practice.board.controllers;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.choongang.practice.board.entities.Post;
-import org.choongang.practice.board.repositories.PostRepository;
 import org.choongang.practice.board.services.PostDeleteService;
 import org.choongang.practice.board.services.PostInfoService;
 import org.choongang.practice.board.services.PostSaveService;
@@ -43,7 +42,8 @@ public class BoardController {
 
     // 게시글 작성
     @GetMapping("/write")
-    public String writePost(Model model) {
+    public String writePost(@ModelAttribute RequestPost form, Model model) {
+        // @ModelAttribute RequestPost form -> 이거 까먹지 말자...제발
         model.addAttribute("post", new Post());
 
         return "board/write";

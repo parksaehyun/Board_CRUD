@@ -18,6 +18,6 @@ public class PostSaveService {
     public Post save(RequestPost form) {
         Post post = new ModelMapper().map(form, Post.class);
 
-        return postRepository.save(post);
+        return postRepository.saveAndFlush(post);
     }
 }
