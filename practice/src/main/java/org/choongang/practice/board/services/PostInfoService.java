@@ -4,11 +4,13 @@ import lombok.RequiredArgsConstructor;
 import org.choongang.practice.board.entities.Post;
 import org.choongang.practice.board.repositories.PostRepository;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 
 @Service
 @RequiredArgsConstructor
+@Transactional
 public class PostInfoService {
 
     private final PostRepository postRepository;

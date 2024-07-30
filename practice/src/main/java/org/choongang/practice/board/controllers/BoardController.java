@@ -3,6 +3,7 @@ package org.choongang.practice.board.controllers;
 import lombok.RequiredArgsConstructor;
 import org.choongang.practice.board.entities.Post;
 import org.choongang.practice.board.repositories.PostRepository;
+import org.choongang.practice.board.services.PostDeleteService;
 import org.choongang.practice.board.services.PostInfoService;
 import org.choongang.practice.board.services.PostSaveService;
 import org.springframework.stereotype.Controller;
@@ -18,6 +19,7 @@ public class BoardController {
 
     private final PostInfoService postInfoService;
     private final PostSaveService postSaveService;
+    private final PostDeleteService postDeleteService;
 
     // 게시글 목록 조회
     @GetMapping("/list")
@@ -50,6 +52,14 @@ public class BoardController {
     public String editPost(@PathVariable("id") Long id, Model model) {
 
         return "board/update";
+    }
+
+    // 게시글 삭제
+    @GetMapping("/delete/{seq}")
+    public String deletePost(@PathVariable("seq") Long id, Model model) {
+        postDeleteService.delete(id);
+
+        return "redirect:/board/list";
     }
 
 
