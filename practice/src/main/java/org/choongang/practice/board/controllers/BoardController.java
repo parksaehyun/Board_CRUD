@@ -50,13 +50,15 @@ public class BoardController {
     // 게시글 수정
     @GetMapping("/update/{id}")
     public String editPost(@PathVariable("id") Long id, Model model) {
+        Post post =  postInfoService.getPost(id);
+        model.addAttribute("post", post);
 
         return "board/update";
     }
 
     // 게시글 삭제
-    @GetMapping("/delete/{seq}")
-    public String deletePost(@PathVariable("seq") Long id, Model model) {
+    @GetMapping("/delete/{id}")
+    public String deletePost(@PathVariable("id") Long id, Model model) {
         postDeleteService.delete(id);
 
         return "redirect:/board/list";

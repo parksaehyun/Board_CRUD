@@ -12,6 +12,7 @@ import org.springframework.transaction.annotation.Transactional;
 public class PostDeleteService {
     private final PostRepository postRepository;
 
+    // 게시글 삭제
     public void delete(Long id) {
         postRepository.deleteById(id);
     }
