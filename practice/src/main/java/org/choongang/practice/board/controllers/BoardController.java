@@ -74,7 +74,11 @@ public class BoardController {
             return "board/write";
         }
 
-        postSaveService.save(form);
+        if (form.getId() != null && postInfoService.getPost(form.getId()) != null) {
+            postSaveService.save(form);
+        } else {
+            postSaveService.save(form);
+        }
 
         return "redirect:/board/list";
     }
